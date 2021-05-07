@@ -1,8 +1,8 @@
 import React from "react";
-import {MapInput} from "../../features/field/components/map-input";
+import { SendFieldForm } from "../../features/field/components/send-field-form";
 
 export const FieldInput = () => (
     <div>
-      <MapInput />
+      <SendFieldForm />
     </div>
 );

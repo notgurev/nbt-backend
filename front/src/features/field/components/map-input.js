@@ -33,7 +33,7 @@ const MapInputTemplate = ({ymaps}) => {
     <Map
       defaultState={{center: [55.751574, 37.573856], zoom: 9}}
       width="100%"
-      height="100vh"
+      height="100%"
       modules={["geoObject.addon.editor"]}
     >
       {!polygonEmpty && <Button data={{content: 'Удалить поле'}} options={{maxWidth: 128, float: 'left'}} instanceRef={buttonRef}/>}

@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <YMaps>
+    <YMaps query={{ apikey: '1378d282-a125-475d-a207-93a8fff40f80' }}>
       <div className="App">
         <div>
           <FieldInput/>

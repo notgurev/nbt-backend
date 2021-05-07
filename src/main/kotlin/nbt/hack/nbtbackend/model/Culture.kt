@@ -28,5 +28,4 @@ data class Culture(
     var ph: Float? = null, // благоприятный pH для культуры
     var sowingTime: LocalDateTime? = null, // дата посева
     var collectionTime: LocalDateTime? = null, // дата сбора урожая
-
 )

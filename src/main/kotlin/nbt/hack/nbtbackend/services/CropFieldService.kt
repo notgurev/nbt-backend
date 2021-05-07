@@ -1,8 +1,8 @@
 package nbt.hack.nbtbackend.services
 
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
-class CropFieldService {
-
+@Component
+interface CropFieldService {
+    // todo CRUD
 }

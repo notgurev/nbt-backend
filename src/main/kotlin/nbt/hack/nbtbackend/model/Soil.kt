@@ -1,16 +1,14 @@
 package nbt.hack.nbtbackend.model
 
-import org.springframework.validation.annotation.Validated
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.validation.Valid
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min
 
 @Entity
-data class Soil (
+data class Soil(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = -1,

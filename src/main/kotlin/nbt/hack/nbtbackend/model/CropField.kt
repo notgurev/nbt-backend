@@ -16,8 +16,8 @@ data class CropField(
         @ManyToOne(cascade = [CascadeType.PERSIST])
     @JsonIgnore
     var owner: User? = null,
-        var name: String? = null, // имя культуры
-        @OneToOne(cascade = [CascadeType.ALL])
+    var cultureName: String? = null, // имя культуры
+    @OneToOne(cascade = [CascadeType.ALL])
     var culture: Culture = Culture(), // растение и его характеристики
         @OneToOne(cascade = [CascadeType.ALL])
     var soil: Soil = Soil(),

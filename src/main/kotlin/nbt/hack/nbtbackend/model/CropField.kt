@@ -9,6 +9,8 @@ class CropField (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = -1,
+    @OneToOne
+    var owner: User,
     var name: String? = "", // имя культуры
     @OneToOne
     var culture: Culture? = Culture(), // растение и его характеристики

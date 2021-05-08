@@ -7,7 +7,7 @@ import javax.persistence.Id
 @Entity
 data class ExpertAnswer(
         @Id
-        var id: Long = TODO("initialize me"),
+        var id: Long = -1,
         @Column(name = "weather_forecast")
         var forecast: String = "",
         @Column(name = "text")

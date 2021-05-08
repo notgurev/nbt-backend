@@ -14,18 +14,18 @@ class ReviewController @Autowired constructor(
     @GetMapping("/{fieldId}")
     @PreAuthorize("hasAuthority('user')")
     fun createReviewRequest(@PathVariable fieldId: Long){
-        return reviewService.createReviewRequest(fieldId)
+        reviewService.createReviewRequest(fieldId)
     }
 
     @PostMapping("/{answerId}")
     @PreAuthorize("hasAuthority('expert')")
     fun updateExpertAnswer(@PathVariable answerId: Long, @RequestBody expertAnswer: ExpertAnswer){
-        return reviewService.updateExpertAnswer(answerId, expertAnswer)
+        reviewService.updateExpertAnswer(answerId, expertAnswer)
     }
 
     @PostMapping("/{answerId}/done")
     @PreAuthorize("hasAuthority('expert')")
     fun markExpertAnswerAsDone(@PathVariable answerId: Long){
-        return reviewService.markExpertAnswerAsDone(answerId)
+        reviewService.markExpertAnswerAsDone(answerId)
     }
 }

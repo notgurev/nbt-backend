@@ -39,7 +39,7 @@ class AuthController @Autowired constructor(
 
     @PostMapping("/signup")
     fun registerUser(@RequestBody signUpRequest: @Valid SignupRequest): ResponseEntity<*> {
-        if (userRepository.existsByUsername(signUpRequest.username)!!) {
+        if (userRepository.existsByUsername(signUpRequest.username)) {
             return ResponseEntity
                     .badRequest()
                     .body<Any>(MessageResponse("Error: Username is already taken!"))
@@ -47,7 +47,7 @@ class AuthController @Autowired constructor(
         val user = User()
         user.username = signUpRequest.username
         user.password = encoder.encode(signUpRequest.password)
-        userRepository.save<User>(user)
+        userRepository.save(user)
         return ResponseEntity.ok<Any>(MessageResponse("User registered successfully!"))
     }
 }

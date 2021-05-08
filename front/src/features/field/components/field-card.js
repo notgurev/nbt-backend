@@ -12,19 +12,19 @@ export const FieldCard = ({ fieldId, ...props }) => {
 
   return (
     <YMaps>
-      <Surface {...props}>
-        <Flex direction="column" height="100%">
-          <Box height="70vh">
-            <Map
-              defaultState={{ center: [55.751574, 37.573856], zoom: 9 }}
-              // defaultState={{ bounds: polygon, zoom: 10 }}
-              width="100%"
-              height="100%"
-            />
-          </Box>
+      <Flex direction="column">
+        <Box height="70vh" width="100%">
+          <Map
+            defaultState={{ center: [55.751574, 37.573856], zoom: 9 }}
+            // defaultState={{ bounds: polygon, zoom: 10 }}
+            width="100%"
+            height="100%"
+          />
+        </Box>
+        <Box padding={2}>
           <FieldInfo fieldId={fieldId} />
-        </Flex>
-      </Surface>
+        </Box>
+      </Flex>
     </YMaps>
   );
 };

@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/react";
 
 export const FieldsPage = () => {
   return (
-    <Box padding={2} minHeight="100vh">
+    <Box>
       <FieldCard fieldId="example" height="100%" />
     </Box>
   );

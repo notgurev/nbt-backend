@@ -12,7 +12,7 @@ data class Soil(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = -1,
-    var type: String? = "", // тип почвы
+    var type: String? = null, // тип почвы
     @Min(0)
     @Max(100)
     var wet: Float? = null, // содержание влаги в почве %

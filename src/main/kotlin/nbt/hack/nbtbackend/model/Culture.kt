@@ -13,7 +13,7 @@ data class Culture(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = -1,
-    var name: String? = "",
+    var name: String? = null,
     var height: Float? = null, // высота растения
     @Min(0)
     @Max(100)

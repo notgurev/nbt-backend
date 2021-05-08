@@ -8,10 +8,8 @@ import javax.persistence.Id
 data class ExpertAnswer(
         @Id
         var id: Long = -1,
-        @Column(name = "weather_forecast")
-        var forecast: String = "",
         @Column(name = "text")
-        var text: String,
+        var text: String? = null,
         @Column(name = "expected_yield")
-        var expectedYield: Float
+        var expectedYield: Float? = null
 )

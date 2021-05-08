@@ -17,23 +17,23 @@ export const Stepper = ({ maxSteps, initialStep, onChange, ...props }) => {
 
   const prevButtonCallback = useCallback(() => {
     if (step > 1) {
-      setStep(step - 1);
+      setStep(step => step - 1);
       onChange(step - 1);
     }
-  }, []);
+  }, [step]);
 
   const nextButtonCallback = useCallback(() => {
     if (step < maxSteps) {
-      setStep(step + 1);
+      setStep(step => step + 1);
       onChange(step + 1);
     }
-  }, []);
+  }, [step]);
 
   return (
     <Flex justify="space-between" align="center" {...props}>
-      <Button isDisabled={initialStep >= maxSteps} onClick={prevButtonCallback}>Назад</Button>
-      <Text as="span">{initialStep} / {maxSteps}</Text>
-      <Button isDisabled={initialStep <= 1} onClick={nextButtonCallback}>Вперед</Button>
+      <Button isDisabled={step <= 1} onClick={prevButtonCallback}>Назад</Button>
+      <Text as="span">{step} / {maxSteps}</Text>
+      <Button isDisabled={step >= maxSteps} onClick={nextButtonCallback}>Вперед</Button>
     </Flex>
   );
 };

@@ -18,6 +18,6 @@ data class User(
     var reviewRequests: MutableList<ReviewRequest> = mutableListOf(),
 
     // for experts
-    @ManyToMany(cascade = [CascadeType.PERSIST])
+    @ManyToMany
     var assignedReviewRequests: MutableList<ReviewRequest> = mutableListOf(),
 )

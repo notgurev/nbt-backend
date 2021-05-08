@@ -1,0 +1,54 @@
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{"username":"test", "password":"test"}
+
+<> 2021-05-08T171452.200.json
+<> 2021-05-08T171306.200.json
+<> 2021-05-08T171052.200.json
+<> 2021-05-08T170114.200.json
+<> 2021-05-08T164227.200.json
+<> 2021-05-08T164059.200.json
+
+###
+POST http://localhost:8080/api/cropFields
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjIwNDc5MjUxLCJleHAiOjE2MjA1NjU2NTF9.0NC2LOGU2kNdnuzg-T7qhr-eFu_5lLqoCkxVIUfBZkwaE7erLAGeq6IQkOsiWODf-LghR5D2OTGdHRblUmCyAA
+
+{"culture": {"name": "пшеница"}}
+
+###
+POST http://localhost:8080/api/cropFields/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjIwNDc5MjUxLCJleHAiOjE2MjA1NjU2NTF9.0NC2LOGU2kNdnuzg-T7qhr-eFu_5lLqoCkxVIUfBZkwaE7erLAGeq6IQkOsiWODf-LghR5D2OTGdHRblUmCyAA
+
+{"name": "some 1name"}
+
+<> 2021-05-08T171323.500.json
+
+###
+GET http://localhost:8080/api/cropFields
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjIwNDc5MjUxLCJleHAiOjE2MjA1NjU2NTF9.0NC2LOGU2kNdnuzg-T7qhr-eFu_5lLqoCkxVIUfBZkwaE7erLAGeq6IQkOsiWODf-LghR5D2OTGdHRblUmCyAA
+
+<> 2021-05-08T171503.200.json
+<> 2021-05-08T171318.200.json
+<> 2021-05-08T171121.200.json
+<> 2021-05-08T171105.200.json
+<> 2021-05-08T170333.200.json
+<> 2021-05-08T170226.200.json
+<> 2021-05-08T170132.200.json
+<> 2021-05-08T164407.200.json
+<> 2021-05-08T164244.200.json
+<> 2021-05-08T164234.200.json
+<> 2021-05-08T164114.200.json
+
+###
+GET http://localhost:8080/api/cropFields/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjIwNDc5MjUxLCJleHAiOjE2MjA1NjU2NTF9.0NC2LOGU2kNdnuzg-T7qhr-eFu_5lLqoCkxVIUfBZkwaE7erLAGeq6IQkOsiWODf-LghR5D2OTGdHRblUmCyAA
+
+<> 2021-05-08T170317.500.json
+<> 2021-05-08T170311.200.json
+
+###
+DELETE http://localhost:8080/api/cropFields/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjIwNDc5MjUxLCJleHAiOjE2MjA1NjU2NTF9.0NC2LOGU2kNdnuzg-T7qhr-eFu_5lLqoCkxVIUfBZkwaE7erLAGeq6IQkOsiWODf-LghR5D2OTGdHRblUmCyAA

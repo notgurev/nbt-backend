@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "react-date-picker/dist/DatePicker.css";
 import { chakra, FormControl, FormLabel, Input, Stack } from "@chakra-ui/react";
 import { Combobox } from "../../../ui/components/combobox";
 import DatePicker from "react-date-picker";
-import { useForm, Controller } from "react-hook-form";
-import { shallowEqual, useSelector } from "react-redux";
+import { Controller } from "react-hook-form";
 
 const items = [
   "пшеница яровая мягкая",
@@ -78,7 +77,6 @@ export const FieldInfoInput = ({ register, setValue, watch, control }) => {
         <Controller
           name="harvestingDate"
           control={control}
-          // defaultValue={formDa}
           render={({ field: { value, onChange } }) => (
             <ChakraDatePicker value={value} onChange={onChange} />
           )}

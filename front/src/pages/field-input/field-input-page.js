@@ -1,8 +1,10 @@
 import React from "react";
 import { SendFieldForm } from "../../features/field/";
 
-export const FieldInput = () => (
+export const FieldInputPage = () => (
   <div>
     <SendFieldForm />
   </div>
 );
+
+export default FieldInputPage;

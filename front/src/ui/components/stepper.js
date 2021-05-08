@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from 'prop-types';
-import { Button, Flex, Text, ChakraComponent } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 
 
 /**

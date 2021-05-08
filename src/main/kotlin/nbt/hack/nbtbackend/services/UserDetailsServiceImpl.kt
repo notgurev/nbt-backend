@@ -22,8 +22,8 @@ class UserDetailsServiceImpl @Autowired constructor(
         val user: User = userRepository.findByUsername(username)
                 ?: throw UsernameNotFoundException("User Not Found with username: $username")
         val grantedAuthorities: MutableSet<GrantedAuthority> = HashSet()
-        grantedAuthorities.add(SimpleGrantedAuthority("user"))
         if (user.isExpert) grantedAuthorities.add(SimpleGrantedAuthority("expert"))
+        else grantedAuthorities.add(SimpleGrantedAuthority("user"))
         return SpringUser(user.username, user.password, grantedAuthorities)
     }
 }

@@ -15,8 +15,7 @@ export const FieldCard = ({ fieldId, ...props }) => {
       <Flex direction="column">
         <Box height="70vh" width="100%">
           <Map
-            defaultState={{ center: [55.751574, 37.573856], zoom: 9 }}
-            // defaultState={{ bounds: polygon, zoom: 10 }}
+            defaultState={{ bounds: polygon[0], zoom: 10 }}
             width="100%"
             height="100%"
           />

@@ -4,10 +4,9 @@ import {
   Map,
   SearchControl,
   Polygon,
-  withYMaps,
 } from "react-yandex-maps/dist/development/react-yandex-maps";
 
-const MapInputTemplate = ({ ymaps }) => {
+export const MapInput = () => {
   const [polygonEmpty, isPolygonEmpty] = useState(true);
   const [polygon, setPolygon] = useState(null);
 
@@ -58,5 +57,3 @@ const MapInputTemplate = ({ ymaps }) => {
     </Map>
   );
 };
-
-export const MapInput = withYMaps(MapInputTemplate);

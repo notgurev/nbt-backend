@@ -15,12 +15,12 @@ const withSuspense = (Component) => (props) => (
 
 const routes = [
   {
-    path: '/',
-    component: withSuspense(UserFieldsPage),
-  },
-  {
     path: '/field_input',
     component: withSuspense(FieldInputPage),
+  },
+  {
+    path: '/',
+    component: withSuspense(UserFieldsPage),
   },
 ];
 

@@ -23,7 +23,7 @@ class AdminController @Autowired constructor(
     }
 
     @DeleteMapping("/experts")
-    fun removeExpert(username: String) {
+    fun removeExpert(@RequestParam username: String) {
         if (AUTH_CONTEXT.name != "admin") throw IllegalAccessException("Only for admin") // todo role
         val user: User = userRepository.findByUsername(username)
             ?: throw IllegalArgumentException("No user with username $username")

@@ -40,14 +40,15 @@ class CropFieldServiceImpl @Autowired constructor(
         return user?.cropFields ?: throw IllegalArgumentException("No user with username = $ownerUsername")
     }
 
-    override fun addCropField(ownerUsername: String, cropField: CropField) {
+    override fun addCropField(ownerUsername: String, cropField: CropField): Long {
         val user: User = userRepository.findByUsername(ownerUsername)
             ?: throw IllegalArgumentException("No user with username = $ownerUsername")
         cropField.owner = user
         user.cropFields.add(cropField)
         addToAutocomplete(cropField)
-        cropFieldRepository.save(cropField)
+        val field = cropFieldRepository.save(cropField)
         userRepository.save(user)
+        return field.id
     }
 
     override fun updateCropField(id: Long, cropField: CropField) {

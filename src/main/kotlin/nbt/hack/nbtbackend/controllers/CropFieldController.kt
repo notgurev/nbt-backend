@@ -26,8 +26,8 @@ class CropFieldController @Autowired constructor(
 
     @PostMapping
     @PreAuthorize("hasAuthority('user')")
-    fun addCropField(@RequestBody cropField: CropField) {
-        cropFieldService.addCropField(AUTH_CONTEXT.name, cropField)
+    fun addCropField(@RequestBody cropField: CropField): Long {
+        return cropFieldService.addCropField(AUTH_CONTEXT.name, cropField)
     }
 
     @PostMapping("/{id}")

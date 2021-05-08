@@ -11,7 +11,7 @@ interface CropFieldService {
 
     fun deleteCropField(id: Long)
 
-    fun addCropField(ownerUsername: String, cropField: CropField)
+    fun addCropField(ownerUsername: String, cropField: CropField): Long
 
     fun updateCropField(id: Long, cropField: CropField)
 }

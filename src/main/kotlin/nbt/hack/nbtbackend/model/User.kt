@@ -12,11 +12,11 @@ data class User(
 
         // for farmers
         @OneToMany
-        var cropFields: List<CropField>,
+        var cropFields: List<CropField> = emptyList(),
         @OneToMany
-        var reviewRequests: List<ReviewRequest>,
+        var reviewRequests: List<ReviewRequest> = emptyList(),
 
         // for experts
         @ManyToMany
-        var assignedReviewRequests: List<ReviewRequest>,
+        var assignedReviewRequests: List<ReviewRequest> = emptyList(),
 )

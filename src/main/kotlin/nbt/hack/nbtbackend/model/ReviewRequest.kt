@@ -10,7 +10,7 @@ data class ReviewRequest(
     @Id
     var id: Long = -1,
     @ManyToMany
-    var experts: List<User>,
+    var experts: MutableList<User> = mutableListOf(),
     @OneToOne
-    var expertAnswer: ExpertAnswer,
+    var expertAnswer: ExpertAnswer? = null,
 )

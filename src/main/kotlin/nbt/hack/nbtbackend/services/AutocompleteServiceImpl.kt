@@ -7,26 +7,33 @@ import nbt.hack.nbtbackend.repositories.autocomplete.SoilAutocompleteRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
-// todo test
-
 @Service
 class AutocompleteServiceImpl @Autowired constructor(
     private val cultureAutocompleteRepository: CultureAutocompleteRepository,
     private val soilAutocompleteRepository: SoilAutocompleteRepository
 ) : AutocompleteService {
-    override fun getCultures(prefix: String): List<String> {
-        return cultureAutocompleteRepository.findAll().map { it.name }
+    override fun getCultures(prefix: String?): List<String> {
+        val cultures = if (prefix == null) {
+            cultureAutocompleteRepository.findAll()
+        } else {
+            cultureAutocompleteRepository.findAllByNameStartingWith(prefix)
+        }
+        return cultures.map { it.name }
     }
 
     override fun getSoils(prefix: String): List<String> {
-        return soilAutocompleteRepository.findAll().map { it.name }
+        return soilAutocompleteRepository.findAllByNameStartingWith(prefix).map { it.name }
     }
 
     override fun addCulture(name: String) {
-        cultureAutocompleteRepository.save(CultureName(name = name))
+        if (!cultureAutocompleteRepository.existsByName(name)) {
+            cultureAutocompleteRepository.save(CultureName(name = name))
+        }
     }
 
     override fun addSoil(name: String) {
-        soilAutocompleteRepository.save(SoilName(name = name))
+        if (!soilAutocompleteRepository.existsByName(name)) {
+            soilAutocompleteRepository.save(SoilName(name = name))
+        }
     }
 }

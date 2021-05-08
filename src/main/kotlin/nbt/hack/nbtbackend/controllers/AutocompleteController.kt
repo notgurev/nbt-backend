@@ -15,7 +15,7 @@ class AutocompleteController @Autowired constructor(
     private val autocompleteService: AutocompleteService
 ) {
     @GetMapping("/cultures")
-    fun getCultureNames(@RequestParam prefix: String): List<String> {
+    fun getCultureNames(@RequestParam(required = false) prefix: String?): List<String> {
         return autocompleteService.getCultures(prefix)
     }
 

@@ -21,8 +21,8 @@ class CropFieldServiceImpl @Autowired constructor(
     }
 
     private fun addToAutocomplete(cropField: CropField) {
-        autocompleteService.addCulture(cropField.culture.name!!)
-        autocompleteService.addSoil(cropField.soil.type!!)
+        cropField.culture.name?.let { autocompleteService.addCulture(it) }
+        cropField.soil.type?.let { autocompleteService.addSoil(it) }
     }
 
     override fun getCropField(id: Long): CropField {

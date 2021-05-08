@@ -1,4 +1,4 @@
-package nbt.hack.nbtbackend.services.jwt
+package nbt.hack.nbtbackend.sequrity.jwt
 
 import nbt.hack.nbtbackend.services.UserDetailsServiceImpl
 import org.springframework.beans.factory.annotation.Autowired

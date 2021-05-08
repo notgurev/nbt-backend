@@ -1,4 +1,4 @@
-package nbt.hack.nbtbackend.services.jwt
+package nbt.hack.nbtbackend.sequrity.jwt
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.MediaType

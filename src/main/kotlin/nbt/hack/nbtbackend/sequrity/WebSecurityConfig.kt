@@ -1,8 +1,8 @@
 package nbt.hack.nbtbackend.sequrity
 
 import nbt.hack.nbtbackend.services.UserDetailsServiceImpl
-import nbt.hack.nbtbackend.services.jwt.AuthEntryPointJwt
-import nbt.hack.nbtbackend.services.jwt.AuthTokenFilter
+import nbt.hack.nbtbackend.sequrity.jwt.AuthEntryPointJwt
+import nbt.hack.nbtbackend.sequrity.jwt.AuthTokenFilter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

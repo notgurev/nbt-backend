@@ -8,7 +8,7 @@ export const SendFieldForm = () => {
     <FormControl>
       <Flex direction="column" height="100vh">
         <Box flexGrow="1">
-          <MapInput/>
+          <MapInput />
         </Box>
         <Stepper initialStep={1} maxSteps={5} padding={[2, 4]} />
       </Flex>

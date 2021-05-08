@@ -11,12 +11,12 @@ data class User(
         var isExpert: Boolean = false,
 
         // for farmers
-        @OneToMany
-        var cropFields: List<CropField> = emptyList(),
-        @OneToMany
-        var reviewRequests: List<ReviewRequest> = emptyList(),
+        @OneToMany(cascade = [CascadeType.PERSIST])
+        var cropFields: MutableList<CropField> = mutableListOf(),
+        @OneToMany(cascade = [CascadeType.PERSIST])
+        var reviewRequests: MutableList<ReviewRequest> =  mutableListOf(),
 
         // for experts
-        @ManyToMany
-        var assignedReviewRequests: List<ReviewRequest> = emptyList(),
+        @ManyToMany(cascade = [CascadeType.PERSIST])
+        var assignedReviewRequests: MutableList<ReviewRequest> =  mutableListOf(),
 )

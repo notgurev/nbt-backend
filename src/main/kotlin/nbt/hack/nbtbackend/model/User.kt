@@ -7,6 +7,7 @@ import javax.persistence.*
 data class User(
     @Id
     var username: String? = null,
+    val name: String? = null, // имя для обращений
     var password: String? = null,
     var isExpert: Boolean = false,
 

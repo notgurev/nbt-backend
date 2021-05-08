@@ -5,18 +5,18 @@ import javax.persistence.*
 @Entity
 @Table(name = "accounts")
 data class User(
-        @Id
-        var username: String? = null,
-        var password: String? = null,
-        var isExpert: Boolean = false,
+    @Id
+    var username: String? = null,
+    var password: String? = null,
+    var isExpert: Boolean = false,
 
-        // for farmers
-        @OneToMany(cascade = [CascadeType.PERSIST])
-        var cropFields: MutableList<CropField> = mutableListOf(),
-        @OneToMany(cascade = [CascadeType.PERSIST])
-        var reviewRequests: MutableList<ReviewRequest> =  mutableListOf(),
+    // for farmers
+    @OneToMany(cascade = [CascadeType.PERSIST])
+    var cropFields: MutableList<CropField> = mutableListOf(),
+    @OneToMany(cascade = [CascadeType.PERSIST])
+    var reviewRequests: MutableList<ReviewRequest> = mutableListOf(),
 
-        // for experts
-        @ManyToMany(cascade = [CascadeType.PERSIST])
-        var assignedReviewRequests: MutableList<ReviewRequest> =  mutableListOf(),
+    // for experts
+    @ManyToMany(cascade = [CascadeType.PERSIST])
+    var assignedReviewRequests: MutableList<ReviewRequest> = mutableListOf(),
 )

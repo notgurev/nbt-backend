@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-date-picker/dist/DatePicker.css";
 import { chakra, FormControl, FormLabel, Input, Stack } from "@chakra-ui/react";
 import { Combobox } from "../../../ui/components/combobox";
 import DatePicker from "react-date-picker";
+import { useForm, Controller } from "react-hook-form";
+import { shallowEqual, useSelector } from "react-redux";
 
 const items = [
   "пшеница яровая мягкая",
@@ -19,9 +21,14 @@ const items = [
 
 const ChakraDatePicker = chakra(DatePicker);
 
-export const FieldInfoInput = () => {
-  const [sowingDate, setSowingDate] = useState(new Date());
-  const [harvesting, setHarvestingDate] = useState(new Date());
+export const FieldInfoInput = ({ register, setValue, watch, control }) => {
+  const cultureValue = watch("culture");
+  const previousCultureValue = watch("previousCulture");
+
+  useEffect(() => {
+    register("culture");
+    register("previousCulture");
+  }, [register]);
 
   return (
     <Stack
@@ -35,6 +42,8 @@ export const FieldInfoInput = () => {
       <FormControl>
         <Combobox
           items={items}
+          defaultValue={cultureValue}
+          onChange={(val) => setValue("culture", val)}
           label={(labelProps) => (
             <FormLabel {...labelProps}>Культура</FormLabel>
           )}
@@ -42,11 +51,13 @@ export const FieldInfoInput = () => {
       </FormControl>
       <FormControl>
         <FormLabel>Сорт</FormLabel>
-        <Input />
+        <Input {...register("grade")} />
       </FormControl>
       <FormControl>
         <Combobox
           items={items}
+          defaultValue={previousCultureValue}
+          onChange={(val) => setValue("previousCulture", val)}
           label={(labelProps) => (
             <FormLabel {...labelProps}>Предшественник</FormLabel>
           )}
@@ -54,16 +65,23 @@ export const FieldInfoInput = () => {
       </FormControl>
       <FormControl>
         <FormLabel>Дата сева</FormLabel>
-        <ChakraDatePicker
-          value={sowingDate}
-          onChange={setSowingDate}
+        <Controller
+          name="sowingDate"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <ChakraDatePicker value={value} onChange={onChange} />
+          )}
         />
       </FormControl>
       <FormControl>
         <FormLabel>Дата сборки предшественника</FormLabel>
-        <ChakraDatePicker
-          value={harvesting}
-          onChange={setHarvestingDate}
+        <Controller
+          name="harvestingDate"
+          control={control}
+          // defaultValue={formDa}
+          render={({ field: { value, onChange } }) => (
+            <ChakraDatePicker value={value} onChange={onChange} />
+          )}
         />
       </FormControl>
     </Stack>

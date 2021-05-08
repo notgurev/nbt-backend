@@ -1,5 +1,5 @@
 import React from "react";
-import { SendFieldForm } from "../../features/field/components/send-field-form";
+import { SendFieldForm } from "../../features/field/";
 
 export const FieldInput = () => (
   <div>

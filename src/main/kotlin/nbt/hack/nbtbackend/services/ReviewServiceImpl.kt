@@ -20,8 +20,8 @@ class ReviewServiceImpl @Autowired constructor(
         reviewRequestRepository.save(reviewRequest)
     }
 
-    override fun updateExpertAnswer(id: Long, expertAnswer: ExpertAnswer) {
-        expertAnswer.id = id
+    override fun updateExpertAnswer(answerId: Long, expertAnswer: ExpertAnswer) {
+        expertAnswer.id = answerId
         expertAnswerRepository.save(expertAnswer)
     }
 

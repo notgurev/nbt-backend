@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 interface ReviewService {
     fun createReviewRequest(fieldId: Long)
 
-    fun updateExpertAnswer(id: Long, expertAnswer: ExpertAnswer)
+    fun updateExpertAnswer(answerId: Long, expertAnswer: ExpertAnswer)
 
     fun markExpertAnswerAsDone(answerId: Long)
 }

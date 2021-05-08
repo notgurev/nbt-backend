@@ -12,11 +12,17 @@ import org.springframework.stereotype.Service
 @Service
 class CropFieldServiceImpl @Autowired constructor(
     private val cropFieldRepository: CropFieldRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val autocompleteService: AutocompleteService
 ) : CropFieldService {
 
     private fun checkIfExpert(): Boolean {
         return AUTH_CONTEXT.authorities.stream().anyMatch { it.authority == "expert" }
+    }
+
+    private fun addToAutocomplete(cropField: CropField) {
+        autocompleteService.addCulture(cropField.culture.name!!)
+        autocompleteService.addSoil(cropField.soil.type!!)
     }
 
     override fun getCropField(id: Long): CropField {
@@ -39,6 +45,7 @@ class CropFieldServiceImpl @Autowired constructor(
             ?: throw IllegalArgumentException("No user with username = $ownerUsername")
         cropField.owner = user
         user.cropFields.add(cropField)
+        addToAutocomplete(cropField)
         cropFieldRepository.save(cropField)
         userRepository.save(user)
     }
@@ -50,6 +57,7 @@ class CropFieldServiceImpl @Autowired constructor(
             throw IllegalAccessException("Only owner can access this crop field")
         cropField.id = id
         cropField.owner = field?.owner
+        addToAutocomplete(cropField)
         cropFieldRepository.save(cropField)
     }
 

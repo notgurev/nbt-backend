@@ -16,7 +16,9 @@ data class CropField(
     var owner: User? = null,
     var name: String? = "", // имя культуры
     @OneToOne(cascade = [CascadeType.ALL])
-    var culture: Culture? = Culture(), // растение и его характеристики
+    var culture: Culture = Culture(), // растение и его характеристики
+    @OneToOne(cascade = [CascadeType.ALL])
+    var soil: Soil = Soil(),
     var previousCulture: String? = "", // имя предыдущей культуры
     var area: Float? = -1.0F, // площадь поля
     var yield: Float? = -1.0F, // урожайность

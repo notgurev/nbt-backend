@@ -12,28 +12,30 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 @Configuration
 @PropertySource(value = ["classpath:/predefined.properties"], encoding = "UTF-8")
-class Config {
+class FirstBootConfig {
     @Bean
-    fun commandLineRunner(
+    fun addAdminOnFirstBoot(
         userRepository: UserRepository,
         encoder: PasswordEncoder,
-        @Value("\${admin.password}") password: String,
+        @Value("\${admin.password}") password: String
+    ) = CommandLineRunner {
+        // add admin on first boot
+        if (!userRepository.existsByUsername("admin")) {
+            val admin = User(username = "admin", password = encoder.encode(password))
+            userRepository.save(admin)
+        }
+    }
+
+    @Bean
+    fun predefinedNamesForAutocomplete(
         @Value("\${predefined.autocomplete.cultures}")
         cultures: Set<String>,
         @Value("\${predefined.autocomplete.soils}")
         soils: Set<String>,
         autocompleteService: AutocompleteService
-    ): CommandLineRunner {
-        return CommandLineRunner {
-            // add admin on first boot
-            if (!userRepository.existsByUsername("admin")) {
-                val admin = User(username = "admin", password = encoder.encode(password))
-                userRepository.save(admin)
-            }
-
-            // add predefined culture and soil names
-            soils.forEach(autocompleteService::addSoil)
-            cultures.forEach(autocompleteService::addCulture)
-        }
+    ) = CommandLineRunner {
+        // add predefined culture and soil names
+        soils.forEach(autocompleteService::addSoil)
+        cultures.forEach(autocompleteService::addCulture)
     }
 }

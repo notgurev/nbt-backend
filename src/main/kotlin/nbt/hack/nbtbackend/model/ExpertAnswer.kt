@@ -8,6 +8,8 @@ import javax.persistence.Id
 data class ExpertAnswer(
         @Id
         var id: Long = -1,
+        @Column(name = "done")
+        var done: Boolean = false,
         @Column(name = "text")
         var text: String? = null,
         @Column(name = "expected_yield")

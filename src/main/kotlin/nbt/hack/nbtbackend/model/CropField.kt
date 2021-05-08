@@ -1,15 +1,18 @@
 package nbt.hack.nbtbackend.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min
 
 @Entity
-class CropField(
+data class CropField(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "crop_field_sequence")
+    @SequenceGenerator(name = "crop_field_sequence", initialValue = 1)
     var id: Long = -1,
-    @OneToOne(cascade = [CascadeType.PERSIST])
+    @ManyToOne(cascade = [CascadeType.PERSIST])
+    @JsonIgnore
     var owner: User? = null,
     var name: String? = "", // имя культуры
     @OneToOne(cascade = [CascadeType.ALL])

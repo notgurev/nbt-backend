@@ -59,4 +59,4 @@ const MapInputTemplate = ({ ymaps }) => {
   );
 };
 
-export const MapInput = withYMaps(MapInputTemplate, true);
+export const MapInput = withYMaps(MapInputTemplate);

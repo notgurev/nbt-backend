@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 
-export const Combobox = ({ items, listMaxHeight = "200px", label, ...props }) => {
+export const Combobox = ({ items, listMaxHeight = "200px", label, inputProps, ...props }) => {
   const [inputItems, setInputItems] = useState(items);
   const {
     isOpen,
@@ -38,7 +38,7 @@ export const Combobox = ({ items, listMaxHeight = "200px", label, ...props }) =>
     <Box {...props}>
       {label(getLabelProps())}
       <InputGroup {...getComboboxProps()} lineHeight="shorter">
-        <Input {...getInputProps()} />
+        <Input {...getInputProps()} {...inputProps} />
         <InputRightElement>
           <IconButton
             {...getToggleButtonProps()}

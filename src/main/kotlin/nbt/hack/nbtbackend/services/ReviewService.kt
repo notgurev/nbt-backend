@@ -13,4 +13,6 @@ interface ReviewService {
     fun markExpertAnswerAsDone(answerId: Long)
 
     fun getUnansweredReviewRequest(): List<ReviewRequest>
+
+    fun getReviewRequests(): List<ReviewRequest>
 }

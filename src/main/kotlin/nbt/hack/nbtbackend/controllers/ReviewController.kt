@@ -10,29 +10,26 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/reviews")
 class ReviewController @Autowired constructor(
-        private var reviewService: ReviewService,
-){
+    private var reviewService: ReviewService,
+) {
     @GetMapping("/{fieldId}")
     @PreAuthorize("hasAuthority('user')")
-    fun createReviewRequest(@PathVariable fieldId: Long){
-        reviewService.createReviewRequest(fieldId)
-    }
+    fun createReviewRequest(@PathVariable fieldId: Long) = reviewService.createReviewRequest(fieldId)
+
+    @GetMapping
+    fun getMyReviewRequests() = reviewService.getReviewRequests()
 
     @PostMapping("/{answerId}")
     @PreAuthorize("hasAuthority('expert')")
-    fun updateExpertAnswer(@PathVariable answerId: Long, @RequestBody expertAnswer: ExpertAnswer){
+    fun updateExpertAnswer(@PathVariable answerId: Long, @RequestBody expertAnswer: ExpertAnswer) {
         reviewService.updateExpertAnswer(answerId, expertAnswer)
     }
 
     @PostMapping("/{answerId}/done")
     @PreAuthorize("hasAuthority('expert')")
-    fun markExpertAnswerAsDone(@PathVariable answerId: Long){
-        reviewService.markExpertAnswerAsDone(answerId)
-    }
+    fun markExpertAnswerAsDone(@PathVariable answerId: Long) = reviewService.markExpertAnswerAsDone(answerId)
 
-    @GetMapping
+    @GetMapping("unanswered")
     @PreAuthorize("hasAuthority('expert')")
-    fun getUnansweredReviewRequest(): List<ReviewRequest>{
-        return reviewService.getUnansweredReviewRequest()
-    }
+    fun getUnansweredReviewRequest(): List<ReviewRequest> = reviewService.getUnansweredReviewRequest()
 }

@@ -21,7 +21,11 @@ class ReviewServiceImpl @Autowired constructor(
     }
 
     override fun updateExpertAnswer(answerId: Long, expertAnswer: ExpertAnswer) {
-        expertAnswer.id = answerId
+        val expAnswer = expertAnswerRepository.findById(answerId).maybeValue
+        expAnswer?.let {
+            it.text = expertAnswer.text
+            it.expectedYield = expertAnswer.expectedYield
+        }
         expertAnswerRepository.save(expertAnswer)
     }
 
@@ -31,7 +35,7 @@ class ReviewServiceImpl @Autowired constructor(
         expertAnswerRepository.save(expertAnswer)
     }
 
-    override fun getUnansweredReviewRequest(): List<ReviewRequest>{
+    override fun getUnansweredReviewRequest(): List<ReviewRequest> {
         return reviewRequestRepository.findAll().filter {
             if (it.expertAnswer == null) false else !(it.expertAnswer!!.done)
         }

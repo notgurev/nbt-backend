@@ -18,7 +18,7 @@ const FieldsListItem = ({ fieldId, index }) => {
 };
 
 export const FieldsList = ({ ...props }) => {
-  const fieldIds = useSelector(state => state.entities.fields.allIds);
+  const fieldIds = useSelector(state => state.fields.entities.fields.allIds);
 
   return (
     <List {...props}>

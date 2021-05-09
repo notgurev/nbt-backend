@@ -1,21 +1,27 @@
 import React, { useCallback, useState } from "react";
 import { MapInput } from "./map-input";
 import { Stepper } from "../../../ui/components/stepper";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton } from "@chakra-ui/react";
 import { FieldInfoInput } from "./field-info-input";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { CheckCircleIcon } from "@chakra-ui/icons";
+import { SoilInfoInput } from "./soil-info-input";
 
 const screens = [
   (props) => <MapInput {...props} />,
-  (props) => <FieldInfoInput {...props} />,
+  (props) => <FieldInfoInput  {...props} />,
+  (props) => <SoilInfoInput {...props} />,
 ];
 
 const renderScreen = (step, props) => screens[step - 1](props);
 
 const defaultValues = {
-  culture: '',
-  previousCulture: '',
+  cultureName: "",
+  previousCulture: "",
+  soil: {
+    type: "",
+  },
 };
 
 export const SendFieldForm = () => {
@@ -33,13 +39,12 @@ export const SendFieldForm = () => {
 
   const onStepChange = (val) => {
     setScreen(val);
-    handleSubmit(onSubmit)();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex direction="column" height="100vh">
-        <Box flexGrow="1">
+        <Box flexGrow="1" overflowY="auto">
           {renderScreen(screen, { register, setValue, control, watch })}
         </Box>
         <Stepper
@@ -48,6 +53,17 @@ export const SendFieldForm = () => {
           onChange={onStepChange}
           padding={[2, 4]}
         />
+        <Box position="absolute" bottom="65px" width="100%" padding={[0, 4]}>
+          <Box textAlign="center">
+            <IconButton
+              type="submit"
+              colorScheme="teal"
+              aria-label="finish"
+              borderRadius="50%"
+              icon={<CheckCircleIcon />}
+            />
+          </Box>
+        </Box>
       </Flex>
     </form>
   );

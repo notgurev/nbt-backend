@@ -20,12 +20,12 @@ const items = [
 
 const ChakraDatePicker = chakra(DatePicker);
 
-export const FieldInfoInput = ({ register, setValue, watch, control }) => {
-  const cultureValue = watch("culture");
+export const FieldInfoInput = ({ register, setValue, watch, control, ...props }) => {
+  const cultureValue = watch("cultureName");
   const previousCultureValue = watch("previousCulture");
 
   useEffect(() => {
-    register("culture");
+    register("cultureName");
     register("previousCulture");
   }, [register]);
 
@@ -37,12 +37,13 @@ export const FieldInfoInput = ({ register, setValue, watch, control }) => {
       align="stretch"
       margin={2}
       lineHeight="short"
+      {...props}
     >
       <FormControl>
         <Combobox
           items={items}
           defaultValue={cultureValue}
-          onChange={(val) => setValue("culture", val)}
+          onChange={(val) => setValue("cultureName", val)}
           label={(labelProps) => (
             <FormLabel {...labelProps}>Культура</FormLabel>
           )}
@@ -65,7 +66,7 @@ export const FieldInfoInput = ({ register, setValue, watch, control }) => {
       <FormControl>
         <FormLabel>Дата сева</FormLabel>
         <Controller
-          name="sowingDate"
+          name="culture.sowingTime"
           control={control}
           render={({ field: { onChange, value } }) => (
             <ChakraDatePicker value={value} onChange={onChange} />
@@ -75,7 +76,7 @@ export const FieldInfoInput = ({ register, setValue, watch, control }) => {
       <FormControl>
         <FormLabel>Дата сборки предшественника</FormLabel>
         <Controller
-          name="harvestingDate"
+          name="culture.collectionTime"
           control={control}
           render={({ field: { value, onChange } }) => (
             <ChakraDatePicker value={value} onChange={onChange} />

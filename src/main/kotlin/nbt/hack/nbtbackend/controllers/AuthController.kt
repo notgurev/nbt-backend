@@ -1,9 +1,8 @@
 package nbt.hack.nbtbackend.controllers
 
-import nbt.hack.nbtbackend.payload.request.LoginRequest
-import nbt.hack.nbtbackend.payload.request.SignupRequest
-import nbt.hack.nbtbackend.payload.response.JwtResponse
-import nbt.hack.nbtbackend.payload.response.MessageResponse
+import nbt.hack.nbtbackend.controllers.dto.AuthRequest
+import nbt.hack.nbtbackend.model.User
+import nbt.hack.nbtbackend.controllers.dto.JwtResponse
 import nbt.hack.nbtbackend.repositories.UserRepository
 import nbt.hack.nbtbackend.sequrity.jwt.JwtUtils
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,7 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
-import nbt.hack.nbtbackend.model.User
 
 typealias SpringUser = org.springframework.security.core.userdetails.User
 
@@ -22,32 +20,34 @@ typealias SpringUser = org.springframework.security.core.userdetails.User
 @RestController
 @RequestMapping("/api/auth")
 class AuthController @Autowired constructor(
-        var authenticationManager: AuthenticationManager,
-        var userRepository: UserRepository,
-        var encoder: PasswordEncoder,
-        var jwtUtils: JwtUtils
+    val authenticationManager: AuthenticationManager,
+    val userRepository: UserRepository,
+    val encoder: PasswordEncoder,
+    val jwtUtils: JwtUtils
 ) {
-    @PostMapping("/signin")
-    fun authenticateUser(@RequestBody loginRequest: @Valid LoginRequest): ResponseEntity<*> {
+    private fun responseToken(username: String, password: String): ResponseEntity<JwtResponse> {
         val authentication = authenticationManager.authenticate(
-                UsernamePasswordAuthenticationToken(loginRequest.username, loginRequest.password))
+            UsernamePasswordAuthenticationToken(username, password)
+        )
         SecurityContextHolder.getContext().authentication = authentication
-        val jwt = jwtUtils.generateJwtToken(authentication)
+        val token = jwtUtils.generateJwtToken(authentication)
         val user = authentication.principal as SpringUser
-        return ResponseEntity.ok<Any>(JwtResponse(jwt, user.username))
+        return ResponseEntity.ok(JwtResponse(token, user.username))
+    }
+
+    @PostMapping("/signin")
+    fun authenticateUser(@RequestBody @Valid authRequest: AuthRequest): ResponseEntity<JwtResponse> {
+        return responseToken(authRequest.username, authRequest.password)
     }
 
     @PostMapping("/signup")
-    fun registerUser(@RequestBody signUpRequest: @Valid SignupRequest): ResponseEntity<*> {
-        if (userRepository.existsByUsername(signUpRequest.username)) {
-            return ResponseEntity
-                    .badRequest()
-                    .body<Any>(MessageResponse("Error: Username is already taken!"))
+    fun registerUser(@RequestBody @Valid authRequest: AuthRequest): ResponseEntity<JwtResponse> {
+        val (username, password) = authRequest
+        if (userRepository.existsByUsername(username)) {
+            throw IllegalArgumentException("Error: username is already taken!")
         }
-        val user = User()
-        user.username = signUpRequest.username
-        user.password = encoder.encode(signUpRequest.password)
+        val user = User(username = username, password = encoder.encode(password))
         userRepository.save(user)
-        return ResponseEntity.ok<Any>(MessageResponse("User registered successfully!"))
+        return responseToken(username, password)
     }
 }

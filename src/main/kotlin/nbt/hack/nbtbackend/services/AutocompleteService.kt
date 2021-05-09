@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component
 
 @Component
 interface AutocompleteService {
-    fun getCultures(prefix: String): List<String>
+    fun getCultures(prefix: String?): List<String>
 
     fun getSoils(prefix: String): List<String>
 

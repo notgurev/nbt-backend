@@ -8,18 +8,19 @@ import javax.validation.constraints.Min
 @Entity
 data class CropField(
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "crop_field_sequence")
-    @SequenceGenerator(name = "crop_field_sequence", initialValue = 0)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = -1,
     @ManyToOne(cascade = [CascadeType.PERSIST])
     @JsonIgnore
     var owner: User? = null,
-    var name: String? = null, // имя культуры
+    var cultureName: String? = null, // имя культуры
     @OneToOne(cascade = [CascadeType.ALL])
     var culture: Culture = Culture(), // растение и его характеристики
     @OneToOne(cascade = [CascadeType.ALL])
     var soil: Soil = Soil(),
     var previousCulture: String? = null, // имя предыдущей культуры
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    var coordinates: MutableList<Contour> = mutableListOf(),
     var area: Float? = null, // площадь поля
     var yield: Float? = null, // урожайность
     @Min(0)

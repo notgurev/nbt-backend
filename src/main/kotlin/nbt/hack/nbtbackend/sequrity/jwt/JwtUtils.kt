@@ -6,25 +6,23 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Component
 import java.security.SignatureException
-import java.util.*
 
 
 @Component
 class JwtUtils {
     @Value("\${app.jwtSecret}")
-    private val jwtSecret: String? = null
+    private lateinit var jwtSecret: String
 
-    @Value("\${app.jwtExpirationMs}")
-    private val jwtExpirationMs = 0
     fun generateJwtToken(authentication: Authentication): String {
         val userPrincipal = authentication.principal as User
-        return Jwts.builder().setSubject(userPrincipal.username).setIssuedAt(Date())
-                .setExpiration(Date(Date().time + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .compact()
+        return Jwts.builder()
+            .setSubject(userPrincipal.username)
+            .signWith(SignatureAlgorithm.HS512, jwtSecret)
+            .compact()
     }
 
     fun getUserNameFromJwtToken(token: String?): String {
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject()
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).body.subject
     }
 
     fun validateJwtToken(authToken: String?): Boolean {

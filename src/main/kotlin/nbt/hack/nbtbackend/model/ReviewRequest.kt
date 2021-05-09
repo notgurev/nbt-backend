@@ -1,16 +1,16 @@
 package nbt.hack.nbtbackend.model
 
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.ManyToMany
-import javax.persistence.OneToOne
+import javax.persistence.*
 
 @Entity
 data class ReviewRequest(
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = -1,
-    @ManyToMany
-    var experts: MutableList<User> = mutableListOf(),
+    @Column(name = "submitted")
+    var submitted: Boolean = false,
     @OneToOne
-    var expertAnswer: ExpertAnswer? = null,
+    var field: CropField? = null,
+    @OneToOne(orphanRemoval = true, cascade = [CascadeType.ALL])
+    var expertAnswer: ExpertAnswer? = ExpertAnswer(),
 )

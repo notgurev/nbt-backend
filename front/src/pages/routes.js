@@ -6,6 +6,7 @@ import {
 
 const UserFieldsPage = React.lazy(() => import('./fields/fields'));
 const FieldInputPage = React.lazy(() => import('./field-input/field-input-page'));
+const AuthorizationPage = React.lazy(() => import('./authorization/authorization-page'));
 
 const withSuspense = (Component) => (props) => (
   <Suspense fallback={<div>Загрузка</div>}>
@@ -17,6 +18,10 @@ const routes = [
   {
     path: '/field_input',
     component: withSuspense(FieldInputPage),
+  },
+  {
+    path: '/auth',
+    component: withSuspense(AuthorizationPage),
   },
   {
     path: '/',

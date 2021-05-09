@@ -53,6 +53,6 @@ class AuthController @Autowired constructor(
         user.username = signUpRequest.username
         user.password = encoder.encode(signUpRequest.password)
         userRepository.save(user)
-        return responseToken(user.username!!, user.password!!)
+        return responseToken(signUpRequest.username, signUpRequest.password)
     }
 }

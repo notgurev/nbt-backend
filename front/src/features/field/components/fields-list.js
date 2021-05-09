@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Surface } from "../../../ui/components/surface";
 
 const FieldsListItem = ({ fieldId, index }) => {
-  const { cultureName } = useSelector(state => state.entities.fields.byId[fieldId]);
+  const { cultureName } = useSelector(state => state.fields.entities.fields.byId[fieldId]);
 
   return (
     <Link to={`/fields/${fieldId}`}>
@@ -23,7 +23,7 @@ export const FieldsList = ({ ...props }) => {
   return (
     <List {...props}>
       {fieldIds.map((fieldId, index) => (
-        <ListItem>
+        <ListItem key={fieldId}>
           <FieldsListItem fieldId={fieldId} index={index} />
         </ListItem>
       ))}

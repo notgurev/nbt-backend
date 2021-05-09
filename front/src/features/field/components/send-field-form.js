@@ -1,17 +1,19 @@
 import React, { useCallback, useState } from "react";
 import { MapInput } from "./map-input";
 import { Stepper } from "../../../ui/components/stepper";
-import { Box, Button, Flex, IconButton } from "@chakra-ui/react";
+import { Box, Flex, IconButton } from "@chakra-ui/react";
 import { FieldInfoInput } from "./field-info-input";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import { SoilInfoInput } from "./soil-info-input";
+import { EnvironmentPropertiesInput } from "./environment-properties-input";
 
 const screens = [
   (props) => <MapInput {...props} />,
   (props) => <FieldInfoInput  {...props} />,
   (props) => <SoilInfoInput {...props} />,
+  (props) => <EnvironmentPropertiesInput {...props} />
 ];
 
 const renderScreen = (step, props) => screens[step - 1](props);

@@ -82,7 +82,6 @@ export const SoilInfoInput = ({ register, setValue, watch, control, ...props }) 
 
   useEffect(() => {
     register("soil.type");
-    register("previousCulture");
   }, [register]);
 
   return (

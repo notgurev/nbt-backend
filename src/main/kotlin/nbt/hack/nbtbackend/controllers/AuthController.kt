@@ -27,14 +27,19 @@ class AuthController @Autowired constructor(
         var encoder: PasswordEncoder,
         var jwtUtils: JwtUtils
 ) {
-    @PostMapping("/signin")
-    fun authenticateUser(@RequestBody loginRequest: @Valid LoginRequest): ResponseEntity<*> {
+    private fun responseToken(username: String, password: String): ResponseEntity<Any> {
         val authentication = authenticationManager.authenticate(
-                UsernamePasswordAuthenticationToken(loginRequest.username, loginRequest.password))
+            UsernamePasswordAuthenticationToken(username, password)
+        )
         SecurityContextHolder.getContext().authentication = authentication
         val jwt = jwtUtils.generateJwtToken(authentication)
         val user = authentication.principal as SpringUser
-        return ResponseEntity.ok<Any>(JwtResponse(jwt, user.username))
+        return ResponseEntity.ok(JwtResponse(jwt, user.username))
+    }
+
+    @PostMapping("/signin")
+    fun authenticateUser(@RequestBody loginRequest: @Valid LoginRequest): ResponseEntity<*> {
+        return responseToken(loginRequest.username, loginRequest.password)
     }
 
     @PostMapping("/signup")
@@ -48,6 +53,6 @@ class AuthController @Autowired constructor(
         user.username = signUpRequest.username
         user.password = encoder.encode(signUpRequest.password)
         userRepository.save(user)
-        return ResponseEntity.ok<Any>(MessageResponse("User registered successfully!"))
+        return responseToken(user.username!!, user.password!!)
     }
 }

@@ -6,8 +6,8 @@ export const ControlPanel = ({ onFieldsToggle, ...props }) => {
   const [fieldsOpen, isFieldsOpen] = useState(false);
 
   const fieldButtonCallback = useCallback(() => {
+    onFieldsToggle(!fieldsOpen);
     isFieldsOpen(state => !state);
-    onFieldsToggle(fieldsOpen);
   }, [fieldsOpen]);
 
   return (

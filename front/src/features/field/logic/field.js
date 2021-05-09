@@ -6,7 +6,7 @@ const initialState = {
     fields: {
       byId: {
         example: {
-          name: 'Кукуруза',
+          cultureName: 'Кукуруза',
           polygon: [
             // Координаты внешнего контура.
             [[-80, 60], [-90, 50], [-60, 40], [-80, 60]],
@@ -20,7 +20,7 @@ const initialState = {
           height: 1.5,
         }
       },
-      allIds: [],
+      allIds: ['example'],
     },
   },
 };

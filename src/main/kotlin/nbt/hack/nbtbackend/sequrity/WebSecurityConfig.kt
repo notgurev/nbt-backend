@@ -54,7 +54,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/**", "/", "/static/**", "/api/autocomplete/**").permitAll()
+                .authorizeRequests().antMatchers("/api/auth/**", "/static/**", "/api/autocomplete/**").permitAll()
                 .anyRequest().authenticated()
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter::class.java)
     }

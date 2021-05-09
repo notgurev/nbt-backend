@@ -1,12 +1,11 @@
 package nbt.hack.nbtbackend.model
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class ExpertAnswer(
         @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
         var id: Long = -1,
         @Column(name = "done")
         var done: Boolean = false,

@@ -30,4 +30,10 @@ class ReviewServiceImpl @Autowired constructor(
         expertAnswer?.let { it.done = true } ?: throw IllegalArgumentException("No expert answer with id = $answerId")
         expertAnswerRepository.save(expertAnswer)
     }
+
+    override fun getUnansweredReviewRequest(): List<ReviewRequest>{
+        return reviewRequestRepository.findAll().filter {
+            if (it.expertAnswer == null) false else !(it.expertAnswer!!.done)
+        }
+    }
 }

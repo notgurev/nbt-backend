@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { sendField } from "../../../api/field";
 
 const initialState = {
   entities: {
@@ -24,11 +25,27 @@ const initialState = {
   },
 };
 
+const sendFieldData = createAsyncThunk(
+  `fields/sendFieldData`,
+  async (fieldData) => {
+      const response = await sendField(fieldData);
+      if (response.ok) {
+        return fieldData;
+      }
+      throw new Error('Request error');
+  }
+);
+
 const fieldsSlice = createSlice({
   name: 'fields',
   initialState,
   reducers: {
 
+  },
+  extraReducers: builder => {
+    builder.addCase(sendFieldData.fulfilled, (state, { payload }) => {
+
+    })
   }
 });
 

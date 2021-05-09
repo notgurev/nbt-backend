@@ -1,6 +1,5 @@
 import React from "react";
 import { FieldInfo } from "./field-info";
-import { Surface } from "../../../ui/components/surface";
 import { Map, YMaps } from "react-yandex-maps";
 import { useSelector } from "react-redux";
 import { Box, Flex } from "@chakra-ui/react";

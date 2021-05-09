@@ -20,7 +20,7 @@ data class CropField(
     var soil: Soil = Soil(),
     var previousCulture: String? = null, // имя предыдущей культуры
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    var coordinates: MutableList<Circuit> = mutableListOf(),
+    var coordinates: MutableList<Contour> = mutableListOf(),
     var area: Float? = null, // площадь поля
     var yield: Float? = null, // урожайность
     @Min(0)

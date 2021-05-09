@@ -6,6 +6,7 @@ import {
 
 const UserFieldsPage = React.lazy(() => import('./fields/fields'));
 const FieldInputPage = React.lazy(() => import('./field-input/field-input-page'));
+const HomePage = React.lazy(() => import('./home/home'));
 const AuthorizationPage = React.lazy(() => import('./authorization/authorization-page'));
 
 const withSuspense = (Component) => (props) => (
@@ -24,8 +25,12 @@ const routes = [
     component: withSuspense(AuthorizationPage),
   },
   {
-    path: '/',
+    path: '/fields',
     component: withSuspense(UserFieldsPage),
+  },
+  {
+    path: '/',
+    component: withSuspense(HomePage),
   },
 ];
 

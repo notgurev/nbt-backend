@@ -12,14 +12,14 @@ import {
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 
 export const Combobox = ({
-                           items,
-                           listMaxHeight = "200px",
-                           label,
-                           defaultValue = '',
-                           onChange,
-                           inputProps,
-                           ...props
-                         }) => {
+  items,
+  listMaxHeight = "200px",
+  label,
+  defaultValue = "",
+  onChange,
+  inputProps,
+  ...props
+}) => {
   const [inputItems, setInputItems] = useState(items);
   const {
     isOpen,
@@ -33,7 +33,7 @@ export const Combobox = ({
   } = useCombobox({
     items: inputItems,
     defaultInputValue: defaultValue,
-    onInputValueChange: ({inputValue}) => {
+    onInputValueChange: ({ inputValue }) => {
       onChange(inputValue);
       setInputItems(
         items.filter((item) =>
@@ -47,7 +47,10 @@ export const Combobox = ({
     <Box {...props}>
       {label(getLabelProps())}
       <InputGroup {...getComboboxProps()} lineHeight="shorter">
-        <Input {...getInputProps()} {...inputProps} onChange={e => console.dir(e)} />
+        <Input
+          {...getInputProps()}
+          {...inputProps}
+        />
         <InputRightElement>
           <IconButton
             {...getToggleButtonProps()}
@@ -55,7 +58,7 @@ export const Combobox = ({
             variant="ghost"
             isRound
             size="sm"
-            icon={isOpen ? <ArrowUpIcon/> : <ArrowDownIcon/>}
+            icon={isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
           />
         </InputRightElement>
       </InputGroup>
@@ -72,17 +75,17 @@ export const Combobox = ({
         marginTop={2}
       >
         {isOpen &&
-        inputItems.map((item, index) => (
-          <ListItem
-            key={`${item}${index}`}
-            {...getItemProps({item, index})}
-            bgColor={index === highlightedIndex ? 'gray.100' : ''}
-            _hover={{bgColor: 'gray.50'}}
-            padding={[1, 2]}
-          >
-            {item}
-          </ListItem>
-        ))}
+          inputItems.map((item, index) => (
+            <ListItem
+              key={`${item}${index}`}
+              {...getItemProps({ item, index })}
+              bgColor={index === highlightedIndex ? "gray.100" : ""}
+              _hover={{ bgColor: "gray.50" }}
+              padding={[1, 2]}
+            >
+              {item}
+            </ListItem>
+          ))}
       </List>
     </Box>
   );
